@@ -8,12 +8,6 @@ const fs = require( 'fs' ),
 
 const T = new Twit( config );
 
-function randomFromArray( arr, pokeNum ){
-    /* Helper function for picking a random item from an array. */
-    return arr[pokeNum];
-    // return arr[Math.floor( Math.random() * arr.length )];
-}
-
 function tweetImage(pokeNum){
     /* First, read the content of the images folder. */
 
@@ -33,7 +27,7 @@ function tweetImage(pokeNum){
 
             console.log( 'opening an image...' );
 
-            const imagePath = path.join( __dirname, '/images/' + randomFromArray( images, pokeNum ) ),
+            const imagePath = path.join( __dirname, '/images/' + images[pokeNum]),
                 imageData = fs.readFileSync( imagePath, { encoding: 'base64' } );
 
             /* Upload the image to Twitter. */
@@ -93,6 +87,7 @@ function tweetImage(pokeNum){
 }
 
 var pokeNum = 0;
+// tweetImage(pokeNum)
 while(pokeNum < 6){
     setTimeout(tweetImage, 1000*10, pokeNum);
     console.log(pokeNum);
